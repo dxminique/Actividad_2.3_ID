@@ -50,7 +50,7 @@ jobs:
     steps:
       # Paso 1: Checkout del repositorio
       - name: Checkout code
-        uses: actions/checkout@4
+        uses: actions/checkout@v4
 
       # Paso 2: Configurar JDK 17
       - name: Set up JDK 17
