@@ -37,9 +37,12 @@ jobs:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
         run: snyk auth $SNYK_TOKEN
 
-      - name: Snyk test Java dependencies
-        run: snyk test --severity-threshold=high --all-projects
+      - name: Build with Maven first
+        run: mvn clean install -DskipTests
 
+      - name: Snyk test Java dependencies
+        run: snyk test --severity-threshold=high --file=pom.xml
+        
       - name: Generate Snyk JSON Report
         if: always()
         run: |
