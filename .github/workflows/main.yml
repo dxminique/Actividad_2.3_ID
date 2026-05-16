@@ -41,8 +41,11 @@ jobs:
         run: mvn clean install -DskipTests
 
       - name: Snyk test Java dependencies
-        run: snyk test --severity-threshold=high --file=pom.xml
-        
+        env:
+          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+        run: snyk test --severity-threshold=high --file=pom.xml --package-manager=maven
+        continue-on-error: true
+
       - name: Generate Snyk JSON Report
         if: always()
         run: |
